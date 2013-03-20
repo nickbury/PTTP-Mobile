@@ -1,7 +1,7 @@
 var RouteModel = function () {
 
     this.get = function (selector) {
-        if (selector !== "nameID" || selector !== "POIArr") {
+        if (selector !== "nameID" && selector !== "POIArr") {
             console.log("incorrect attribute");
         } else {
             return this[selector];
@@ -9,7 +9,7 @@ var RouteModel = function () {
     };
 
     this.set = function (selector, value) {
-        if (selector !== "nameID" || selector !== "POIArr") {
+        if (selector !== "nameID" && selector !== "POIArr") {
             console.log("incorrect attribute");
         } else {
             this[selector] = value;
@@ -21,7 +21,7 @@ var RouteModel = function () {
             console.log("you need either a nameID or POIArr")
         } else {
             var key = this.nameID;
-            var value = this.POIArr; //need to store value as JSON
+            var value = JSON.stringify(this.POIArr); //need to store value as JSON
             window.localStorage.setItem(key, value);
         }
     };
