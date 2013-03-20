@@ -1,7 +1,7 @@
-var RouteModel = function () {
+var RouteModel = function (nameID, POIArray) {
 
     this.get = function (selector) {
-        if (selector !== "nameID" && selector !== "POIArr") {
+        if (selector !== "nameID" && selector !== "POIArray") {
             console.log("incorrect attribute");
         } else {
             return this[selector];
@@ -9,7 +9,7 @@ var RouteModel = function () {
     };
 
     this.set = function (selector, value) {
-        if (selector !== "nameID" && selector !== "POIArr") {
+        if (selector !== "nameID" && selector !== "POIArray") {
             console.log("incorrect attribute");
         } else {
             this[selector] = value;
@@ -17,13 +17,18 @@ var RouteModel = function () {
     };
 
     this.save = function () {
-        if (!this.nameID || !this.POIArr) {
-            console.log("you need either a nameID or POIArr")
+        if (!this.nameID || !this.POIArray) {
+            console.log("you need either a nameID or POIArray")
         } else {
             var key = this.nameID;
-            var value = JSON.stringify(this.POIArr); //need to store value as JSON
+            var value = JSON.stringify(this.POIArray); //need to store value as JSON
             window.localStorage.setItem(key, value);
         }
     };
+
+    if (nameID !== undefined && POIArray !== undefined) {
+        this.nameID = nameID;
+        this.POIArray = POIArray;
+    }
 
 }
