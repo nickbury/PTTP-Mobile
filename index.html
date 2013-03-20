@@ -11,22 +11,30 @@
   </head>
   <body>
 
+    <!-- Menu view page -->
+
     <div data-role="page" id="menuView">
-      <h1>This is the menu</h1>
+      <script id="route-li-tpl" type="text/x-handlers-template">
+        //list the routes by name
+
+
+      </script>
 
       <div data-role="footer" data-id="menuToolBar" data-position="fixed">
         <div data-role="navbar">
           <ul>
-            <li><a href="#mapView">Map</a></li>
-            <li><a href="#directionsView">Directions</a></li>
-            <li><a href="#routeEditView">Create New</a></li>
+            <!-- <li><a href="#mapView">Map</a></li>
+            <li><a href="#directionsView">Directions</a></li> -->
+            <li><a href="#createNew">Create New</a></li>
           </ul>
         </div><!-- /navbar -->
       </div><!-- /footer -->
     </div>
 
-    <div data-role="page" id="routeEditView">
-     <h1>This is the Route Edit Page</h1>
+
+    <!-- Create New Route Page -->
+
+    <div data-role="page" id="createNew">
 
       <div data-role="footer" data-id="menuToolBar" data-position="fixed">
         <div data-role="navbar">
@@ -39,8 +47,34 @@
       </div><!-- /footer -->
     </div>
 
+    <!-- Route Edit Page -->
+
+    <div data-role="page" id="routeEditView">
+      <script id="route-edit-li-tpl" type="text/x-handlers-template">
+        //list the details of each point of interest for the selected route
+
+
+      </script>
+
+      <div data-role="footer" data-id="menuToolBar" data-position="fixed">
+        <div data-role="navbar">
+          <ul>
+            <li><a href="#mapView">Map</a></li>
+            <li><a href="#directionsView">Directions</a></li>
+            <li><a href="#menuView">Menu</a></li>
+          </ul>
+        </div><!-- /navbar -->
+      </div><!-- /footer -->
+    </div>
+
+    <!-- Directions view page -->
+
     <div data-role="page" id="directionsView">
-      <h1>This is where directions are displayed</h1>
+      <script id="directions-li-tpl" type="text/x-handlers-template">
+        //list the directions out that have been returned from google
+
+
+      </script>
 
       <div data-role="footer" data-id="menuToolBar" data-position="fixed">
         <div data-role="navbar">
@@ -52,6 +86,8 @@
         </div><!-- /navbar -->
       </div><!-- /footer -->
     </div>
+
+    <!-- Map view page -->
 
     <div data-role="page" id="mapView">
       <h1>This is the Map view</h1>
