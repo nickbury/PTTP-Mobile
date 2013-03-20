@@ -12,19 +12,59 @@
   <body>
 
     <div data-role="page" id="menuView">
+      <h1>This is the menu</h1>
 
+      <div data-role="footer" data-id="menuToolBar" data-position="fixed">
+        <div data-role="navbar">
+          <ul>
+            <li><a href="#mapView">Map</a></li>
+            <li><a href="#directionsView">Directions</a></li>
+            <li><a href="#routeEditView">Create New</a></li>
+          </ul>
+        </div><!-- /navbar -->
+      </div><!-- /footer -->
     </div>
 
     <div data-role="page" id="routeEditView">
+     <h1>This is the Route Edit Page</h1>
 
+      <div data-role="footer" data-id="menuToolBar" data-position="fixed">
+        <div data-role="navbar">
+          <ul>
+            <li><a href="#mapView">Map</a></li>
+            <li><a href="#directionsView">Directions</a></li>
+            <li><a href="#menuView">Menu</a></li>
+          </ul>
+        </div><!-- /navbar -->
+      </div><!-- /footer -->
     </div>
 
     <div data-role="page" id="directionsView">
+      <h1>This is where directions are displayed</h1>
 
+      <div data-role="footer" data-id="menuToolBar" data-position="fixed">
+        <div data-role="navbar">
+          <ul>
+            <li><a href="#mapView">Map</a></li>
+            <li><a href="#routeEditView">Edit</a></li>
+            <li><a href="#menuView">Menu</a></li>
+          </ul>
+        </div><!-- /navbar -->
+      </div><!-- /footer -->
     </div>
 
     <div data-role="page" id="mapView">
+      <h1>This is the Map view</h1>
 
+      <div data-role="footer" data-id="menuToolBar" data-position="fixed">
+        <div data-role="navbar">
+          <ul>
+            <li><a href="#directionsView">Directions</a></li>
+            <li><a href="#routeEditView">Edit</a></li>
+            <li><a href="#menuView">Menu</a></li>
+          </ul>
+        </div><!-- /navbar -->
+      </div><!-- /footer -->
     </div>
 
 
