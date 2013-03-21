@@ -1,3 +1,6 @@
+/*jslint indent:4*/
+/*global window, console */
+
 var RouteModel = function (nameID, POIArray) {
 
     this.get = function (selector) {
@@ -18,7 +21,7 @@ var RouteModel = function (nameID, POIArray) {
 
     this.save = function () {
         if (!this.nameID || !this.POIArray) {
-            console.log("you need either a nameID or POIArray")
+            console.log("you need either a nameID or POIArray");
         } else {
             var key = this.nameID;
             var value = JSON.stringify(this.POIArray); //need to store value as JSON
@@ -39,4 +42,4 @@ var RouteModel = function (nameID, POIArray) {
         this.POIArray = POIArray;
     }
 
-}
+};
