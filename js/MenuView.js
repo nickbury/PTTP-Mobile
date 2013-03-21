@@ -11,7 +11,6 @@ var MenuView = function () {
     };
 
     this.initialize = function () {
-
         var key;
         for (key in window.localStorage) {
             if (window.localStorage.hasOwnProperty(key)) {
