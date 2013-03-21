@@ -26,6 +26,14 @@ var RouteModel = function (nameID, POIArray) {
         }
     };
 
+    this.destroy = function () {
+        if (!this.nameID || !this.POIArray) {
+            console.log("There is nothing worth destroying");
+        } else {
+            window.localStorage.removeItem(this.nameID);
+        }
+    };
+
     if (nameID !== undefined && POIArray !== undefined) {
         this.nameID = nameID;
         this.POIArray = POIArray;
