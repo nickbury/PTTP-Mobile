@@ -16,7 +16,7 @@
     <div data-role="page" id="menu"> 
       <script id="route-li-tpl" type="text/x-handlebars-template">
           {{#.}}
-            <li><a href="#route/{{this}}">{{this}}</a></li>
+            <li><a href="#edit/{{this}}">{{this}}</a></li>
           {{/.}}
       </script>
       <ul class="route-list"></ul>
@@ -36,6 +36,10 @@
     <!-- Create New Route Page -->
 
     <div data-role="page" id="create">
+      <script id="create-route-form" type="text/x-handlebars-template">
+
+
+      </script>
 
       <div data-role="footer" data-id="menuToolBar" data-position="fixed">
         <div data-role="navbar">
@@ -50,10 +54,9 @@
 
     <!-- Route Edit Page -->
 
-    <div data-role="page" id="route">
+    <div data-role="page" id="edit">
       <script id="route-edit-li-tpl" type="text/x-handlebars-template">
         //list the details of each point of interest for the selected route
-
 
       </script>
 
@@ -110,6 +113,7 @@
     <script src="js/lib/handlebars.js"></script>
     <script src="js/RouteModel.js"></script>
     <script src="js/MenuView.js"></script>
+    <script src="js/RouteView.js"></script>
 
     <script src="js/main.js"></script>
   </body>

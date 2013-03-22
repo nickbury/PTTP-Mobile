@@ -1,5 +1,5 @@
 /*jslint indent:4 */
-/*global window, $, console, MenuView*/
+/*global window, $, console, MenuView, RouteView*/
 
 var app = {
 
@@ -12,6 +12,7 @@ var app = {
             } else {
                 this.menuPage = new MenuView().render();
             }
+            return;
         }
     },
 
