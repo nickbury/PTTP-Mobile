@@ -47,6 +47,15 @@ var CreateView = function () {
 
     this.initialize = function () {
         this.render();
+        $("#get-directions").on("tap", function (e) {
+            //check and build Route Model then save it
+
+            if (formCount === 0) {
+                e.stopImmediatePropagation();
+                e.preventDefault();
+                alert("Try filling out one more location");
+            }
+        });
     };
 
     this.initialize();
