@@ -6,6 +6,6 @@ multiple points of interest and the time they will be at each point, then the ap
 the points on a timely basis.
 
 ###### Resources
-[jQuery Mobile](http://jquerymobile.com/)
-[PhoneGap Framework](http://phonegap.com/)
-[HandlebarsJS](http://handlebarsjs.com/)
+* [jQuery Mobile](http://jquerymobile.com/)
+* [PhoneGap Framework](http://phonegap.com/)
+* [HandlebarsJS](http://handlebarsjs.com/)
