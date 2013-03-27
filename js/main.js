@@ -1,19 +1,16 @@
 /*jslint indent:4 */
-/*global window, $, console, MenuView, RouteView*/
+/*global window, $, console, MenuView, RouteView, CreateView*/
 
 var app = {
 
     route: function () {
         var self = this;
-        var hash = window.location.hash;
-        if (!hash) {
-            if (this.menuPage) {
-                console.log("menuPage already exists");
-            } else {
-                this.menuPage = new MenuView().render();
-            }
-            return;
+        if (!window.location.hash) {
+            this.menuPage = new MenuView().render();
         }
+        $("#create").on("pagebeforeshow", function (event, ui) {
+            self.createPage = new CreateView();
+        });
     },
 
     initialize: function () {
