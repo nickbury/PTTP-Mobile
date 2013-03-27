@@ -16,7 +16,7 @@
     <div data-role="page" id="menu"> 
       <script id="route-li-tpl" type="text/x-handlebars-template">
           {{#.}}
-            <li><a href="#edit/{{this}}">{{this}}</a></li>
+            <li><a href="#edit">{{this}}</a></li>
           {{/.}}
       </script>
       <ul class="route-list"></ul>
@@ -26,7 +26,7 @@
           <ul>
             <!-- <li><a href="#map">Map</a></li>
             <li><a href="#directions">Directions</a></li> -->
-            <li><a href="#create">Create New</a></li>
+            <li><a href="#create" >Create New</a></li>
           </ul>
         </div><!-- /navbar -->
       </div><!-- /footer -->
@@ -36,17 +36,30 @@
     <!-- Create New Route Page -->
 
     <div data-role="page" id="create">
-      <script id="create-route-form" type="text/x-handlebars-template">
-
-
+      <script id="create-form-tpl" type="text/x-handlebars-template">
+        <div data-role="fieldcontain" id="form-{{this}}">
+          <label for="location">Location:</label>
+          <input type="text" name="location" id="location-{{this}}" value="" />
+          <label for="time">Time:</label>
+          <input type="text" name="time" id="time-{{this}}" value="" />
+          <a href="#" data-inline="true" data-role="button" id="add-btn-{{this}}">Add Location</a>
+          <a href="#" data-inline="true" data-role="button" id="rem-btn-{{this}}">Remove Location</a>
+        </div>
       </script>
+      <div data-role="fieldcontain">
+        <label for="routeName">Route Name:</label>
+        <input type="text" name="routeName" id="routeName" value="" />
+      </div>
+      <div class="create-render">
+
+      </div>
 
       <div data-role="footer" data-id="menuToolBar" data-position="fixed">
         <div data-role="navbar">
           <ul>
-            <li><a href="#map">Map</a></li>
-            <li><a href="#directions">Directions</a></li>
-            <li><a href="#menu">Menu</a></li>
+            <!-- <li><a href="#map">Map</a></li> -->
+            <li><a href="#directions">Get Directions</a></li>
+            <!-- <li><a href="#menu">Menu</a></li> -->
           </ul>
         </div><!-- /navbar -->
       </div><!-- /footer -->
@@ -84,7 +97,7 @@
         <div data-role="navbar">
           <ul>
             <li><a href="#map">Map</a></li>
-            <li><a href="#route">Edit</a></li>
+            <li><a href="#edit">Edit</a></li>
             <li><a href="#menu">Menu</a></li>
           </ul>
         </div><!-- /navbar -->
@@ -100,7 +113,7 @@
         <div data-role="navbar">
           <ul>
             <li><a href="#directions">Directions</a></li>
-            <li><a href="#route">Edit</a></li>
+            <li><a href="#edit">Edit</a></li>
             <li><a href="#menu">Menu</a></li>
           </ul>
         </div><!-- /navbar -->
@@ -114,6 +127,7 @@
     <script src="js/RouteModel.js"></script>
     <script src="js/MenuView.js"></script>
     <script src="js/RouteView.js"></script>
+    <script src="js/CreateView.js"></script>
 
     <script src="js/main.js"></script>
   </body>
