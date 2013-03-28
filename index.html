@@ -16,7 +16,7 @@
     <div data-role="page" id="menu"> 
       <script id="route-li-tpl" type="text/x-handlebars-template">
           {{#.}}
-            <li><a href="#edit">{{this}}</a></li>
+            <li><a href="#edit" id="{{this}}">{{this}}</a></li>
           {{/.}}
       </script>
       <ul class="route-list"></ul>
@@ -39,9 +39,9 @@
       <script id="create-form-tpl" type="text/x-handlebars-template">
         <div data-role="fieldcontain" id="form-{{this}}">
           <label for="location">Location:</label>
-          <input type="text" name="location" id="location-{{this}}" value="" />
+          <input type="text" name="location" class="location" id="location-{{this}}" value="" />
           <label for="time">Time:</label>
-          <input type="text" name="time" id="time-{{this}}" value="" />
+          <input type="text" name="time" class="time" id="time-{{this}}" value="" />
           <a href="#" data-inline="true" data-role="button" id="add-btn-{{this}}">Add Location</a>
           <a href="#" data-inline="true" data-role="button" id="rem-btn-{{this}}">Remove Location</a>
         </div>

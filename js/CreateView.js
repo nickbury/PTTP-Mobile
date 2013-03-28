@@ -48,12 +48,37 @@ var CreateView = function () {
     this.initialize = function () {
         this.render();
         $("#get-directions").on("tap", function (e) {
-            //check and build Route Model then save it
-
-            if (formCount === 0) {
+            var nameID = $("#routeName").val();
+            if (nameID === "") {
                 e.stopImmediatePropagation();
                 e.preventDefault();
-                alert("Try filling out one more location");
+                alert("You need a name for your route!");
+                return;
+            }
+            var POIArray = [];
+            for (var i = 0; i <= formCount; i++) {
+                var location = $(".location:eq(" + i + ")").val();
+                var time = $(".time:eq(" + i + ")").val();
+                if (location === "" || time === "") {
+                    e.stopImmediatePropagation();
+                    e.preventDefault();
+                    alert("Each point of interest needs a location and a time");
+                    return;
+                } else {
+                    POIArray.push({
+                        location: location,
+                        time: time
+                    });
+                }
+            }
+            var newRoute = new RouteModel(nameID, POIArray);
+            var isSaved = newRoute.save();
+            if (!isSaved) {
+                e.stopImmediatePropagation()
+                e.preventDefault();
+                alert("An error occurred trying to save the route. Please try again.");
+            } else {
+                window.localStorage.setItem("CurrentRoute", nameID);
             }
         });
     };
