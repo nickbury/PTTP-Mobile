@@ -7,6 +7,12 @@ var MenuView = function () {
 
     this.render = function () {
         $(".route-list").html(MenuView.template(this.localStorageKeys));
+        this.localStorageKeys.forEach(function (ele) {
+            $("#" + ele).on("tap", function (e) {
+                window.localStorage.setItem("CurrentRoute", ele);
+                var newRoutePage = new RouteView();
+            });
+        });
         return this;
     };
 
@@ -15,7 +21,6 @@ var MenuView = function () {
         for (key in window.localStorage) {
             if (window.localStorage.hasOwnProperty(key)) {
                 this.localStorageKeys.push(key);
-                console.log(key);
             }
         }
     };

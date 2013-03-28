@@ -22,10 +22,12 @@ var RouteModel = function (nameID, POIArray) {
     this.save = function () {
         if (!this.nameID || !this.POIArray) {
             console.log("you need either a nameID or POIArray");
+            return false;
         } else {
             var key = this.nameID;
             var value = JSON.stringify(this.POIArray); //need to store value as JSON
             window.localStorage.setItem(key, value);
+            return  true;
         }
     };
 
