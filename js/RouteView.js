@@ -1,18 +1,13 @@
 /*jslint indent:4*/
 /*global window, console, $, HandleBars */
 
-var RouteView = function (routeDetails) {
+var RouteView = function () {
 
     this.render = function () {
-        $("<h1>").html(RouteView.template(window.localStorage.getItem(routeDetails)));
-        return this;
-    };
-
-    this.addLocation = function (event) {
 
     };
 
-    this.removeLocation = function (event) {
+    this.addLocation = function () {
 
     };
 
@@ -22,5 +17,3 @@ var RouteView = function (routeDetails) {
 
     this.initialize();
 };
-
-RouteView.template = Handlebars.compile($("#route-edit-li-tpl").html());
