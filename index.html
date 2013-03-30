@@ -68,10 +68,25 @@
     <!-- Route Edit Page -->
 
     <div data-role="page" id="edit">
-      <script id="route-edit-li-tpl" type="text/x-handlebars-template">
-        //list the details of each point of interest for the selected route
-
+      <script id="edit-form-tpl" type="text/x-handlebars-template">
+        {{#.}}
+          <div data-role="fieldcontain" id="edit-form-{{id}}">
+            <label for="location">Location:</label>
+            <input type="text" name="location" class="edit-location" value="{{location}}" />
+            <label for="time">Time:</label>
+            <input type="text" name="time" class="edit-time" value="{{time}}" />
+            <a href="#" data-inline="true" data-role="button" id="edit-add-btn-{{id}}">Add Location</a>
+            <a href="#" data-inline="true" data-role="button" id="edit-rem-btn-{{id}}">Remove Location</a>
+          </div>
+        {{/.}}
       </script>
+      <div data-role="fieldcontain">
+        <label for="edit-routeName">Route Name:</label>
+        <input type="text" name="edit-routeName" id="edit-routeName" value="" />
+      </div>
+      <div class="edit-render">
+
+      </div>
 
       <div data-role="footer" data-id="menuToolBar" data-position="fixed">
         <div data-role="navbar">
