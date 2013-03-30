@@ -80,6 +80,16 @@
           </div>
         {{/.}}
       </script>
+      <script id="edit-add-form-tpl" type="text/x-handlebars-template">
+        <div data-role="fieldcontain" id="edit-form-{{this}}">
+          <label for="location">Location:</label>
+          <input type="text" name="location" class="edit-location" value="" />
+          <label for="time">Time:</label>
+          <input type="text" name="time" class="edit-time" value="" />
+          <a href="#" data-inline="true" data-role="button" id="edit-add-btn-{{this}}">Add Location</a>
+          <a href="#" data-inline="true" data-role="button" id="edit-rem-btn-{{this}}">Remove Location</a>
+        </div>
+      </script>
       <div data-role="fieldcontain">
         <label for="edit-routeName">Route Name:</label>
         <input type="text" name="edit-routeName" id="edit-routeName" value="" />
@@ -91,9 +101,9 @@
       <div data-role="footer" data-id="menuToolBar" data-position="fixed">
         <div data-role="navbar">
           <ul>
-            <li><a href="#map">Map</a></li>
-            <li><a href="#directions">Directions</a></li>
-            <li><a href="#menu">Menu</a></li>
+            <li><a href="#map" id="edit-get-map">Map</a></li>
+            <li><a href="#directions" id="edit-get-directions">Directions</a></li>
+            <li><a href="#menu" id="edit-get-menu">Menu</a></li>
           </ul>
         </div><!-- /navbar -->
       </div><!-- /footer -->
