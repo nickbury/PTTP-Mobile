@@ -13,6 +13,10 @@ var app = {
         $("#create").on("pagebeforeshow", function (event, ui) {
             self.createPage = new CreateView();
         });
+
+        $("#edit").on("pagebeforeshow", function (event, ui) {
+            self.routePage = new RouteView();
+        });
     },
 
     initialize: function () {

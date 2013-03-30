@@ -2,43 +2,51 @@
 /*global window, console, $, Handlebars, alert */
 
 var CreateView = function () {
-
-    var formCount = 0;
+    //formCount is the total number of forms on the page
+    //formINC assures all forms are unique
+    var formCount = 0, formINC = 0;
 
     this.render = function () {
         var self = this;
+        //render template
         var template = Handlebars.compile($("#create-form-tpl").html());
-        $(".create-render").html(template(formCount)).trigger("create");
-        $("#add-btn-" + formCount).on("tap", function (event) {
-            var eventID = formCount;
+        $(".create-render").html(template(formINC)).trigger("create");
+        //clear routename
+        $("#routeName").val("");
+        //add handlers
+        $("#add-btn-" + formINC).on("tap", function (event) {
+            var formID = $(this).attr("id").match(/\d+/);
+            formINC++;
             formCount++;
-            self.addLocation(eventID);
+            self.addLocation(formID);
         });
-        $("#rem-btn-" + formCount).on("tap", function (event) {
+        $("#rem-btn-" + formINC).on("tap", function (event) {
             if (formCount === 0) {
                 alert("You need at least one place to go!");
             } else {
-                var toBeRemoved = $(this).attr("id").match(/\d/);
+                var toBeRemoved = $(this).attr("id").match(/\d+/);
                 $("#form-" + toBeRemoved).remove();
                 formCount--;
             }
         });
     };
 
-    this.addLocation = function (eventID) {
+    this.addLocation = function (formID) {
         var self = this;
         var template = Handlebars.compile($("#create-form-tpl").html());
-        $(".create-render").append(template(formCount)).trigger("create");
-        $("#add-btn-" + formCount).on("tap", function (event) {
-            var eventID = formCount;
+        $("#form-" + formID).after(template(formINC));
+        $("#form-" + formINC).trigger("create");
+        $("#add-btn-" + formINC).on("tap", function (event) {
+            var formID = $(this).attr("id").match(/\d+/);
+            formINC++;
             formCount++;
-            self.addLocation(eventID);
+            self.addLocation(formID);
         });
-        $("#rem-btn-" + formCount).on("tap", function (event) {
+        $("#rem-btn-" + formINC).on("tap", function (event) {
             if (formCount === 0) {
                 alert("You need at least one place to go!");
             } else {
-                var toBeRemoved = $(this).attr("id").match(/\d/);
+                var toBeRemoved = $(this).attr("id").match(/\d+/);
                 $("#form-" + toBeRemoved).remove();
                 formCount--;
             }
@@ -59,6 +67,7 @@ var CreateView = function () {
             for (var i = 0; i <= formCount; i++) {
                 var location = $(".location:eq(" + i + ")").val();
                 var time = $(".time:eq(" + i + ")").val();
+                var id = i;
                 if (location === "" || time === "") {
                     e.stopImmediatePropagation();
                     e.preventDefault();
@@ -66,6 +75,7 @@ var CreateView = function () {
                     return;
                 } else {
                     POIArray.push({
+                        id: id,
                         location: location,
                         time: time
                     });
