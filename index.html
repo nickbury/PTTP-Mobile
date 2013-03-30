@@ -16,7 +16,7 @@
     <div data-role="page" id="menu"> 
       <script id="route-li-tpl" type="text/x-handlebars-template">
           {{#.}}
-            <li><a href="#edit" id="{{this}}">{{this}}</a></li>
+            <li><a href="#edit?={{this}}">{{this}}</a></li>
           {{/.}}
       </script>
       <ul class="route-list"></ul>

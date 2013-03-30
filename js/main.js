@@ -5,9 +5,11 @@ var app = {
 
     route: function () {
         var self = this;
-        if (!window.location.hash) {
-            this.menuPage = new MenuView().render();
-        }
+
+        $("#menu").on("pagebeforeshow", function (event, ui) {
+            self.menuPage = new MenuView().render();
+        });
+
         $("#create").on("pagebeforeshow", function (event, ui) {
             self.createPage = new CreateView();
         });
