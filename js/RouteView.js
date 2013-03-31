@@ -91,7 +91,7 @@ var RouteView = function () {
             }
         }
         //delete old route
-        //window.localStorage.removeItem(routeName);
+        window.localStorage.removeItem(routeName);
         //add new route
         var newRoute = new RouteModel(nameID, newPOIArray);
         var isSaved = newRoute.save();
@@ -107,9 +107,8 @@ var RouteView = function () {
     this.initialize = function () {
         var self = this;
         this.render();
-        //fix handlers
-        $("#edit-get-map, #edit-get-directions, #edit-get-menu").on("tap", function (e) {
-            console.log("Did we get there?");
+
+        $("#edit-get-map, #edit-get-directions, #edit-get-menu").unbind().on("tap", function (e) {
             self.updateRoutes(e);
         });
     };
