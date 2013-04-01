@@ -40,7 +40,7 @@
         <div data-role="fieldcontain" id="form-{{this}}">
           <label for="location">Location:</label>
           <input type="text" name="location" class="location" id="location-{{this}}" value="" />
-          <label for="time">Time:</label>
+          <label for="time">Time (in minutes):</label>
           <input type="text" name="time" class="time" id="time-{{this}}" value="" />
           <a href="#" data-inline="true" data-role="button" id="add-btn-{{this}}">Add Location</a>
           <a href="#" data-inline="true" data-role="button" id="rem-btn-{{this}}">Remove Location</a>
@@ -73,7 +73,7 @@
           <div data-role="fieldcontain" id="edit-form-{{id}}">
             <label for="location">Location:</label>
             <input type="text" name="location" class="edit-location" value="{{location}}" />
-            <label for="time">Time:</label>
+            <label for="time">Time (in minutes):</label>
             <input type="text" name="time" class="edit-time" value="{{time}}" />
             <a href="#" data-inline="true" data-role="button" id="edit-add-btn-{{id}}">Add Location</a>
             <a href="#" data-inline="true" data-role="button" id="edit-rem-btn-{{id}}">Remove Location</a>
@@ -84,7 +84,7 @@
         <div data-role="fieldcontain" id="edit-form-{{this}}">
           <label for="location">Location:</label>
           <input type="text" name="location" class="edit-location" value="" />
-          <label for="time">Time:</label>
+          <label for="time">Time (in minutes):</label>
           <input type="text" name="time" class="edit-time" value="" />
           <a href="#" data-inline="true" data-role="button" id="edit-add-btn-{{this}}">Add Location</a>
           <a href="#" data-inline="true" data-role="button" id="edit-rem-btn-{{this}}">Remove Location</a>
@@ -113,7 +113,7 @@
 
     <div data-role="page" id="directions">
       <script id="directions-li-tpl" type="text/x-handlebars-template">
-        //list the directions out that have been returned from google
+        
 
 
       </script>
@@ -154,6 +154,7 @@
     <script src="js/MenuView.js"></script>
     <script src="js/RouteView.js"></script>
     <script src="js/CreateView.js"></script>
+    <script src="js/DirectionsView.js"></script>
 
     <script src="js/main.js"></script>
   </body>
