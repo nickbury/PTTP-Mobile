@@ -1,5 +1,5 @@
 /*jslint indent:4*/
-/*global window, console, $, Handlebars, alert, RouteModel */
+/*global window, console, $, Handlebars, alert, RouteModel, google */
 
 var RouteView = function () {
 
@@ -66,12 +66,11 @@ var RouteView = function () {
     this.latlngConversion = function (address, callback) {
         console.log(address);
         var latlng = "", geocoder = new google.maps.Geocoder();
-        geocoder.geocode( {"address": address}, function (results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
+        geocoder.geocode({"address": address}, function (results, status) {
+            if (status === google.maps.GeocoderStatus.OK) {
                 console.log("OK");
-                var lat = results[0].geometry.location.lat();
-                var lng = results[0].geometry.location.lng();
-                latlng = latlng + lat + " " + lng;
+                latlng.lat = results[0].geometry.location.lat();
+                latlng.lng = results[0].geometry.location.lng();
                 callback(latlng);
             } else {
                 console.log("Geocode was not successful for the following reason: " + status);
@@ -88,14 +87,13 @@ var RouteView = function () {
             e.stopImmediatePropagation();
             e.preventDefault();
             alert("You need a name for your route!");
-            return;
         } else {
             var newPOIArray = [];
             for (i = 0; i <= formCount; i++) {
                 var location = $(".edit-location:eq(" + i + ")").val();
                 var time = $(".edit-time:eq(" + i + ")").val();
                 var id = i;
-                var a = this.latlngConversion(location, function (latlng) {
+                this.latlngConversion(location, function (latlng) {
                     if (location === "" || time === "") {
                         e.stopImmediatePropagation();
                         e.preventDefault();
@@ -115,7 +113,7 @@ var RouteView = function () {
                             });
                             //delete old route
                             window.localStorage.removeItem(routeName);
-                            //add new route
+                            //create new route
                             var newRoute = new RouteModel(nameID, newPOIArray);
                             var isSaved = newRoute.save();
                             if (!isSaved) {
