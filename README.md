@@ -9,3 +9,4 @@ the points on a timely basis.
 * [jQuery Mobile](http://jquerymobile.com/)
 * [PhoneGap Framework](http://phonegap.com/)
 * [HandlebarsJS](http://handlebarsjs.com/)
+* [Google Maps API V3](https://developers.google.com/maps/documentation/javascript/)
