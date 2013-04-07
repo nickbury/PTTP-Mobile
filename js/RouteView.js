@@ -1,5 +1,5 @@
 /*jslint indent:4*/
-/*global window, console, $, Handlebars, alert, RouteModel, google */
+/*global window, console, $, Handlebars, alert, RouteModel, google, DirectionsView */
 
 var RouteView = function () {
 
@@ -87,7 +87,7 @@ var RouteView = function () {
         }
     };
 
-    this.updateRoutes = function (e) {
+    this.updateRoutes = function (e, callback) {
         var i;
         var nameID = $("#edit-routeName").val();
         if (nameID === "") {
@@ -134,8 +134,8 @@ var RouteView = function () {
                     window.localStorage.setItem("CurrentRoute", nameID);
                 }
             });
+            callback();
         }
-
     };
 
     this.initialize = function () {
@@ -143,7 +143,9 @@ var RouteView = function () {
         this.render();
 
         $("#edit-get-map, #edit-get-directions, #edit-get-menu").unbind().on("tap", function (e) {
-            self.updateRoutes(e);
+            self.updateRoutes(e, function () {
+                var directionsPag = new DirectionsView();
+            });
         });
     };
 
