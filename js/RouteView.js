@@ -72,7 +72,6 @@ var RouteView = function () {
             if (geocoder) {
                 geocoder.geocode({"address": curr}, function (results, status) {
                     if (status === google.maps.GeocoderStatus.OK) {
-                        console.log("OK");
                         latlngArray.push(results[0].geometry.location);
                         if (latlngArray.length === addresses.length) {
                             if (typeof callback === 'function') {
@@ -105,7 +104,6 @@ var RouteView = function () {
                     e.preventDefault();
                     alert("Each point of interest needs a location and a time");
                 } else {
-                    console.log("about to push location: " + location);
                     addresses.push(location);
                     newPOIArray.push({
                         id: id,
@@ -117,8 +115,8 @@ var RouteView = function () {
             this.latlngConversion(addresses, function (results) {
                 var i;
                 for (i = 0; i < results.length; i++) {
-                    console.log("newPOIArray[" + i + "]" + newPOIArray[i].location);
-                    console.log("results[" + i + "]" + results[i]);
+                    //console.log("newPOIArray[" + i + "]" + newPOIArray[i].location);
+                    //console.log("results[" + i + "]" + results[i]);
                     newPOIArray[i].latlng = results[i];
                 }
                 //delete old route

@@ -18,9 +18,9 @@ var app = {
             self.routePage = new RouteView();
         });
 
-        /*$("#directions").on("pagebeforeshow", function (event, ui) {
+        $("#directions").on("pagebeforeshow", function (event, ui) {
             self.directionsPage = new DirectionsView();
-        });*/
+        });
     },
 
     initialize: function () {
