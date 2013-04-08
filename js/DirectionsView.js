@@ -12,7 +12,12 @@ var DirectionsView = function () {
         var directionsService = new google.maps.DirectionsService();
         var point1 = new google.maps.LatLng(start.latlng.jb, start.latlng.kb);
         var point2 = new google.maps.LatLng(end.latlng.jb, end.latlng.kb);
-        var deptTime = Date.now() + start.time * 60000;
+        if (n === 0) {
+            var deptTime = Date.now() + start.time * 60000;
+        } else {
+             var deptTime = new Date(directions[n-1].routes[0].legs[0].arrival_time.value) + start.time * 60000;
+        }
+        console.log(start.location + " time: " + new Date(deptTime));
         //create request to send to google
         var request = {
             origin: point1,
@@ -26,10 +31,10 @@ var DirectionsView = function () {
         directionsService.route(request, function (response, status) {
             if (status === google.maps.DirectionsStatus.OK) {
                 directions.push(response);
-                console.log(directions.length);
+                console.log("directions length: " + directions.length);
                 console.log(directions[n]);
                 if (m+1 > POIArray.length - 1) {
-                    self.render();
+                    self.render(0);
                 } else {
                     self.getDirections(n+1, m+1);
 
@@ -38,14 +43,20 @@ var DirectionsView = function () {
         });
     };
 
-    this.render = function () {
+    this.render = function (n) {
+        var template = Handlebars.compile($("#directions-li-tpl").html());
+        $(".directionsContainer").append(template(n)).trigger("create");
+
         var directionsDisplay = new google.maps.DirectionsRenderer();
-        directionsDisplay.setPanel(document.getElementById("directionsPanel"));
-        console.log(directions[0]);
-        directionsDisplay.setDirections(directions[0]);
+        directionsDisplay.setPanel(document.getElementById("directionsPanel-" + n));
+        directionsDisplay.setDirections(directions[n]);
+        if (n+1 < directions.length) {
+            this.render(n+1);
+        }
     };
 
     this.initialize = function () {
+        $(".directionsContainer").empty();
         var self = this;
         POIArray = JSON.parse(window.localStorage.getItem(window.localStorage.getItem("CurrentRoute")));
 
