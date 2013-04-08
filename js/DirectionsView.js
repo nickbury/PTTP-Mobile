@@ -12,12 +12,12 @@ var DirectionsView = function () {
         var directionsService = new google.maps.DirectionsService();
         var point1 = new google.maps.LatLng(start.latlng.jb, start.latlng.kb);
         var point2 = new google.maps.LatLng(end.latlng.jb, end.latlng.kb);
+        //get correct departure time
         if (n === 0) {
             var deptTime = Date.now() + start.time * 60000;
         } else {
              var deptTime = new Date(directions[n-1].routes[0].legs[0].arrival_time.value) + start.time * 60000;
         }
-        console.log(start.location + " time: " + new Date(deptTime));
         //create request to send to google
         var request = {
             origin: point1,

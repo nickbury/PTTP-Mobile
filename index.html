@@ -113,12 +113,11 @@
 
     <div data-role="page" id="directions">
       <script id="directions-li-tpl" type="text/x-handlebars-template">
-        
-
+        <div id="directionsPanel-{{this}}">
+        </div>
 
       </script>
-      <p>Here be Directions, yar!</p>
-      <div id="directionsPanel">
+      <div class="directionsContainer">
       </div>
       <div data-role="footer" data-id="menuToolBar" data-position="fixed">
         <div data-role="navbar">
