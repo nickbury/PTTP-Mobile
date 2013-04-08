@@ -3,7 +3,12 @@
 
 var RouteView = function () {
 
-    var formCount, formINC, POIArray = [], routeName = window.localStorage.getItem("CurrentRoute");
+    var formCount, 
+        formINC, 
+        POIArray = [],
+        addresses = [],
+        latlngArray = [], 
+        routeName = window.localStorage.getItem("CurrentRoute");
 
     this.render = function () {
         var self = this, i;
@@ -63,26 +68,25 @@ var RouteView = function () {
         });
     };
 
-    this.latlngConversion = function (addresses, callback) {
-        console.log(addresses);
-        var latlngArray = [], i;
-        for (i = 0; i < addresses.length; i++) {
-            var curr = addresses[i];
-            var geocoder = new google.maps.Geocoder();
-            if (geocoder) {
-                geocoder.geocode({"address": curr}, function (results, status) {
-                    if (status === google.maps.GeocoderStatus.OK) {
-                        latlngArray.push(results[0].geometry.location);
-                        if (latlngArray.length === addresses.length) {
-                            if (typeof callback === 'function') {
-                                callback(latlngArray);
-                            }
+    this.latlngConversion = function (n, callback) {
+        console.log(n);
+        var curr = addresses[n], self = this;
+        var geocoder = new google.maps.Geocoder();
+        if (geocoder) {
+            geocoder.geocode({"address": curr}, function (results, status) {
+                if (status === google.maps.GeocoderStatus.OK) {
+                    latlngArray.push(results[0].geometry.location);
+                    if (latlngArray.length === addresses.length) {
+                        if (typeof callback === 'function') {
+                            callback(latlngArray);
                         }
                     } else {
-                        console.log("Geocode was not successful for the following reason: " + status);
+                        self.latlngConversion(n+1);
                     }
-                });
-            }
+                } else {
+                    console.log("Geocode was not successful for the following reason: " + status);
+                }
+            });
         }
     };
 
@@ -94,7 +98,7 @@ var RouteView = function () {
             e.preventDefault();
             alert("You need a name for your route!");
         } else {
-            var newPOIArray = [], addresses = [];
+            var newPOIArray = [];
             for (i = 0; i <= formCount; i++) {
                 var location = $(".edit-location:eq(" + i + ")").val();
                 var time = $(".edit-time:eq(" + i + ")").val();
@@ -112,7 +116,7 @@ var RouteView = function () {
                     });
                 }
             }
-            this.latlngConversion(addresses, function (results) {
+            this.latlngConversion(0, function (results) {
                 var i;
                 for (i = 0; i < results.length; i++) {
                     //console.log("newPOIArray[" + i + "]" + newPOIArray[i].location);

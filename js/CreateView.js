@@ -4,7 +4,10 @@
 var CreateView = function () {
     //formCount is the total number of forms on the page
     //formINC assures all forms are unique
-    var formCount = 0, formINC = 0;
+    var formCount = 0, 
+        formINC = 0,
+        addresses = [],
+        latlngArray = [];
 
     this.render = function () {
         var self = this;
@@ -31,27 +34,25 @@ var CreateView = function () {
         });
     };
 
-    this.latlngConversion = function (addresses, callback) {
-        console.log(addresses);
-        var latlngArray = [], i;
-        for (i = 0; i < addresses.length; i++) {
-            var curr = addresses[i];
-            var geocoder = new google.maps.Geocoder();
-            if (geocoder) {
-                geocoder.geocode({"address": curr}, function (results, status) {
-                    if (status === google.maps.GeocoderStatus.OK) {
-                        console.log("OK");
-                        latlngArray.push(results[0].geometry.location);
-                        if (latlngArray.length === addresses.length) {
-                            if (typeof callback === 'function') {
-                                callback(latlngArray);
-                            }
+    this.latlngConversion = function (n, callback) {
+        console.log("create: " + n);
+        var curr = addresses[n], self = this;
+        var geocoder = new google.maps.Geocoder();
+        if (geocoder) {
+            geocoder.geocode({"address": curr}, function (results, status) {
+                if (status === google.maps.GeocoderStatus.OK) {
+                    latlngArray.push(results[0].geometry.location);
+                    if (latlngArray.length === addresses.length) {
+                        if (typeof callback === 'function') {
+                            callback(latlngArray);
                         }
                     } else {
-                        console.log("Geocode was not successful for the following reason: " + status);
+                        self.latlngConversion(n+1);
                     }
-                });
-            }
+                } else {
+                    console.log("Geocode was not successful for the following reason: " + status);
+                }
+            });
         }
     };
 
@@ -88,7 +89,7 @@ var CreateView = function () {
                 e.preventDefault();
                 alert("You need a name for your route!");
             } else {
-                var POIArray = [], i, addresses = [];
+                var POIArray = [], i;
                 for (i = 0; i <= formCount; i++) {
                     var location = $(".location:eq(" + i + ")").val();
                     var time = $(".time:eq(" + i + ")").val();
@@ -98,7 +99,6 @@ var CreateView = function () {
                         e.preventDefault();
                         alert("Each point of interest needs a location and a time");
                     } else {
-                        console.log("about to push location: " + location);
                         addresses.push(location);
                         POIArray.push({
                             id: id,
@@ -107,7 +107,7 @@ var CreateView = function () {
                         });
                     }
                 }
-                self.latlngConversion(addresses, function (results) {
+                self.latlngConversion(0, function (results) {
                     var i;
                     for (i = 0; i < results.length; i++) {
                         POIArray[i].latlng = results[i];
