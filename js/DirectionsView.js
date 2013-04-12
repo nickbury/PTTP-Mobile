@@ -3,7 +3,9 @@
 
 var DirectionsView = function () {
 
-    var directions = [], POIArray = [];
+    var directions = [], 
+        POIArray = [],
+        prevDeptTime = 0;
     //start and end are POIArray elements
     this.getDirections = function (n, m) {
         var self = this,
@@ -15,12 +17,15 @@ var DirectionsView = function () {
         //get correct departure time
         if (n === 0) {
             var deptTime = Date.now() + start.time * 60000;
+            prevDeptTime = deptTime;
         } else {
             //check to see if the path involves transit
             if (directions[n-1].routes[0].legs[0].arrival_time) {
                 var deptTime = new Date(directions[n-1].routes[0].legs[0].arrival_time.value).valueOf() + start.time * 60000;
+                prevDeptTime = deptTime;
             } else {
-                var deptTime = new Date(Date.now() + directions[n-1].routes[0].legs[0].duration.value).valueOf() + start.time * 60000;
+                var deptTime = new Date(prevDeptTime + directions[n-1].routes[0].legs[0].duration.value).valueOf() + start.time * 60000;
+                prevDeptTime = deptTime;
             }
         }
         console.log("deptTime: " + deptTime);
