@@ -83,11 +83,13 @@ var CreateView = function () {
         this.render();
         //on tap, create new route
         $("#get-directions").on("tap", function (e) {
+            var isReady = true;
             var nameID = $("#routeName").val();
             if (nameID === "") {
                 e.stopImmediatePropagation();
                 e.preventDefault();
                 alert("You need a name for your route!");
+                isReady = false;
             } else {
                 var POIArray = [], i;
                 for (i = 0; i <= formCount; i++) {
@@ -98,6 +100,14 @@ var CreateView = function () {
                         e.stopImmediatePropagation();
                         e.preventDefault();
                         alert("Each point of interest needs a location and a time");
+                        isReady = false;
+                        addresses = [];
+                    } else if (isNaN(time)) {
+                        e.stopImmediatePropagation();
+                        e.preventDefault();
+                        alert("Please enter a number for time");
+                        isReady = false;
+                        addresses = [];
                     } else {
                         addresses.push(location);
                         POIArray.push({
@@ -107,24 +117,26 @@ var CreateView = function () {
                         });
                     }
                 }
-                self.latlngConversion(function (results) {
-                    results.reverse();
-                    var i;
-                    for (i = 0; i < results.length; i++) {
-                        POIArray[i].latlng = results[i];
-                    }
-                    var newRoute = new RouteModel(nameID, POIArray);
-                    console.log(newRoute);
-                    var isSaved = newRoute.save();
-                    if (!isSaved) {
-                        e.stopImmediatePropagation();
-                        e.preventDefault();
-                        alert("An error occurred trying to save the route. Please try again.");
-                    } else {
-                        window.localStorage.setItem("CurrentRoute", nameID);
-                        var dirPage = new DirectionsView();
-                    }
-                });
+                if (isReady) {
+                    self.latlngConversion(function (results) {
+                        results.reverse();
+                        var i;
+                        for (i = 0; i < results.length; i++) {
+                            POIArray[i].latlng = results[i];
+                        }
+                        var newRoute = new RouteModel(nameID, POIArray);
+                        console.log(newRoute);
+                        var isSaved = newRoute.save();
+                        if (!isSaved) {
+                            e.stopImmediatePropagation();
+                            e.preventDefault();
+                            alert("An error occurred trying to save the route. Please try again.");
+                        } else {
+                            window.localStorage.setItem("CurrentRoute", nameID);
+                            var dirPage = new DirectionsView();
+                        }
+                    });
+                }
             }
         });
     };

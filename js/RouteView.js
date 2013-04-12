@@ -69,7 +69,7 @@ var RouteView = function () {
     };
 
     this.latlngConversion = function (callback) {
-        console.log("latlng");
+        console.log("latlng " + addresses.length);
         var curr = addresses.pop(), self = this;
         var geocoder = new google.maps.Geocoder();
         if (geocoder) {
@@ -91,13 +91,14 @@ var RouteView = function () {
         }
     };
 
-    this.updateRoutes = function (e, callback) {
-        var i;
+    this.updateRoutes = function (e) {
+        var i, isReady = true;
         var nameID = $("#edit-routeName").val();
         if (nameID === "") {
             e.stopImmediatePropagation();
             e.preventDefault();
             alert("You need a name for your route!");
+            isReady = false;
         } else {
             var newPOIArray = [];
             for (i = 0; i <= formCount; i++) {
@@ -108,7 +109,17 @@ var RouteView = function () {
                     e.stopImmediatePropagation();
                     e.preventDefault();
                     alert("Each point of interest needs a location and a time");
+                    isReady = false;
+                    addresses = [];
+                    console.log("bad " + id);
+                } else if (isNaN(time)) {
+                    e.stopImmediatePropagation();
+                    e.preventDefault();
+                    alert("Please enter a number for time");
+                    isReady = false;
+                    addresses = [];
                 } else {
+                    console.log("push location and time " + id);
                     addresses.push(location);
                     newPOIArray.push({
                         id: id,
@@ -117,28 +128,30 @@ var RouteView = function () {
                     });
                 }
             }
-            this.latlngConversion(function (results) {
-                results.reverse();
-                var i;
-                for (i = 0; i < results.length; i++) {
-                    //console.log("newPOIArray[" + i + "]" + newPOIArray[i].location);
-                    //console.log("results[" + i + "]" + results[i]);
-                    newPOIArray[i].latlng = results[i];
-                }
-                //delete old route
-                window.localStorage.removeItem(routeName);
-                //create new route
-                var newRoute = new RouteModel(nameID, newPOIArray);
-                var isSaved = newRoute.save();
-                if (!isSaved) {
-                    e.stopImmediatePropagation();
-                    e.preventDefault();
-                    alert("An error occurred trying to save the route. Please try again.");
-                } else {
-                    window.localStorage.setItem("CurrentRoute", nameID);
-                }
-            });
-            callback();
+            if (isReady) {
+                this.latlngConversion(function (results) {
+                    results.reverse();
+                    var i;
+                    for (i = 0; i < results.length; i++) {
+                        console.log("newPOIArray[" + i + "]" + newPOIArray[i].location);
+                        console.log("results[" + i + "]" + results[i]);
+                        newPOIArray[i].latlng = results[i];
+                    }
+                    //delete old route
+                    window.localStorage.removeItem(routeName);
+                    //create new route
+                    var newRoute = new RouteModel(nameID, newPOIArray);
+                    var isSaved = newRoute.save();
+                    if (!isSaved) {
+                        e.stopImmediatePropagation();
+                        e.preventDefault();
+                        alert("An error occurred trying to save the route. Please try again.");
+                    } else {
+                        window.localStorage.setItem("CurrentRoute", nameID);
+                        var dirPage = new DirectionsView();
+                    }
+                });
+            }
         }
     };
 
@@ -147,9 +160,7 @@ var RouteView = function () {
         this.render();
 
         $("#edit-get-map, #edit-get-directions, #edit-get-menu").unbind().on("tap", function (e) {
-            self.updateRoutes(e, function () {
-                var dirPage = new DirectionsView();
-            });
+            self.updateRoutes(e);
         });
     };
 
