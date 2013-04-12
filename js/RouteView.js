@@ -68,20 +68,21 @@ var RouteView = function () {
         });
     };
 
-    this.latlngConversion = function (n, callback) {
-        console.log(n);
-        var curr = addresses[n], self = this;
+    this.latlngConversion = function (callback) {
+        console.log("latlng");
+        var curr = addresses.pop(), self = this;
         var geocoder = new google.maps.Geocoder();
         if (geocoder) {
-            geocoder.geocode({"address": curr}, function (results, status) {
+            geocoder.geocode({"address": curr}, function x(results, status) {
                 if (status === google.maps.GeocoderStatus.OK) {
                     latlngArray.push(results[0].geometry.location);
-                    if (latlngArray.length === addresses.length) {
+                    if (addresses.length === 0) {
                         if (typeof callback === 'function') {
                             callback(latlngArray);
                         }
                     } else {
-                        self.latlngConversion(n+1);
+                        curr = addresses.pop();
+                        geocoder.geocode({"address": curr}, x);
                     }
                 } else {
                     console.log("Geocode was not successful for the following reason: " + status);
@@ -116,7 +117,8 @@ var RouteView = function () {
                     });
                 }
             }
-            this.latlngConversion(0, function (results) {
+            this.latlngConversion(function (results) {
+                results.reverse();
                 var i;
                 for (i = 0; i < results.length; i++) {
                     //console.log("newPOIArray[" + i + "]" + newPOIArray[i].location);
@@ -146,7 +148,7 @@ var RouteView = function () {
 
         $("#edit-get-map, #edit-get-directions, #edit-get-menu").unbind().on("tap", function (e) {
             self.updateRoutes(e, function () {
-                var directionsPag = new DirectionsView();
+                var dirPage = new DirectionsView();
             });
         });
     };
