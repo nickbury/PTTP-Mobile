@@ -16,8 +16,14 @@ var DirectionsView = function () {
         if (n === 0) {
             var deptTime = Date.now() + start.time * 60000;
         } else {
-             var deptTime = new Date(directions[n-1].routes[0].legs[0].arrival_time.value) + start.time * 60000;
+            //check to see if the path involves transit
+            if (directions[n-1].routes[0].legs[0].arrival_time) {
+                var deptTime = new Date(directions[n-1].routes[0].legs[0].arrival_time.value).valueOf() + start.time * 60000;
+            } else {
+                var deptTime = new Date(Date.now() + directions[n-1].routes[0].legs[0].duration.value).valueOf() + start.time * 60000;
+            }
         }
+        console.log("deptTime: " + deptTime);
         //create request to send to google
         var request = {
             origin: point1,
@@ -34,8 +40,10 @@ var DirectionsView = function () {
                 console.log("directions length: " + directions.length);
                 console.log(directions[n]);
                 if (m+1 > POIArray.length - 1) {
+                    console.log("render");
                     self.render(0);
                 } else {
+                    console.log("get more directions");
                     self.getDirections(n+1, m+1);
 
                 }
