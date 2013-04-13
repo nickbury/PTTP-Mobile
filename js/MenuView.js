@@ -21,7 +21,7 @@ var MenuView = function () {
                 if (ans) {
                     var curr = $(this).html();
                     window.localStorage.removeItem(curr);
-                    $(this).parent().remove();
+                    $(this).parent().parent().parent().remove();
                 }
             });
         }
