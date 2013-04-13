@@ -1,10 +1,10 @@
 /*jslint indent:4*/
-/*global window, console, $, Handlebars, alert, google, RouteModel */
+/*global window, console, $, Handlebars, alert, google, RouteModel, DirectionsView */
 
 var CreateView = function () {
     //formCount is the total number of forms on the page
     //formINC assures all forms are unique
-    var formCount = 0, 
+    var formCount = 0,
         formINC = 0,
         addresses = [],
         latlngArray = [];
@@ -89,6 +89,11 @@ var CreateView = function () {
                 e.stopImmediatePropagation();
                 e.preventDefault();
                 alert("You need a name for your route!");
+                isReady = false;
+            } else if (/^[a-zA-Z0-9- ]*$/.test(nameID) === false) {
+                e.stopImmediatePropagation();
+                e.preventDefault();
+                alert("Your route name has illegal characters in it. Please use only letters, numbers, and spaces.");
                 isReady = false;
             } else {
                 var POIArray = [], i;

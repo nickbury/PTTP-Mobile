@@ -3,11 +3,11 @@
 
 var RouteView = function () {
 
-    var formCount, 
-        formINC, 
+    var formCount,
+        formINC,
         POIArray = [],
         addresses = [],
-        latlngArray = [], 
+        latlngArray = [],
         routeName = window.localStorage.getItem("CurrentRoute");
 
     this.render = function () {
@@ -99,6 +99,11 @@ var RouteView = function () {
             e.preventDefault();
             alert("You need a name for your route!");
             isReady = false;
+        } else if (/^[a-zA-Z0-9- ]*$/.test(nameID) === false) {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+            alert("Your route name has illegal characters in it. Please use only letters, numbers, and spaces.");
+            isReady = false;
         } else {
             var newPOIArray = [];
             for (i = 0; i <= formCount; i++) {
@@ -119,7 +124,6 @@ var RouteView = function () {
                     isReady = false;
                     addresses = [];
                 } else {
-                    console.log("push location and time " + id);
                     addresses.push(location);
                     newPOIArray.push({
                         id: id,
@@ -133,8 +137,8 @@ var RouteView = function () {
                     results.reverse();
                     var i;
                     for (i = 0; i < results.length; i++) {
-                        console.log("newPOIArray[" + i + "]" + newPOIArray[i].location);
-                        console.log("results[" + i + "]" + results[i]);
+                        //console.log("newPOIArray[" + i + "]" + newPOIArray[i].location);
+                        //console.log("results[" + i + "]" + results[i]);
                         newPOIArray[i].latlng = results[i];
                     }
                     //delete old route
