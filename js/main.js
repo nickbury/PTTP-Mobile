@@ -1,5 +1,5 @@
 /*jslint indent:4 */
-/*global window, $, console, MenuView, RouteView, CreateView, DirectionsView*/
+/*global window, $, console, MenuView, RouteView, CreateView, DirectionsView, MapView*/
 
 var app = {
 
@@ -18,9 +18,6 @@ var app = {
             self.routePage = new RouteView();
         });
 
-        /*$("#directions").on("pagebeforeshow", function (event, ui) {
-            self.directionsPage = new DirectionsView();
-        });*/
     },
 
     initialize: function () {
