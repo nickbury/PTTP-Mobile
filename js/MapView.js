@@ -6,6 +6,8 @@ var MapView = function () {
     var POIArray = [];
 
     this.addMarkers = function (map) {
+        //temporary method to display all the points of interest
+        //TODO: implement custom method that adds useful data to info windows
         var i, waypts = [], request;
 
         var directionsService = new google.maps.DirectionsService();
@@ -17,7 +19,6 @@ var MapView = function () {
 
         if (POIArray.length > 2) {
             for (i = 1; i < POIArray.length - 1; i++) {
-                console.log(POIArray[i].location);
                 waypts.push({
                     location: POIArray[i].location,
                     stopover: true
@@ -48,7 +49,7 @@ var MapView = function () {
 
         var mapOptions = {
             center: new google.maps.LatLng(35.6008, -82.5542),
-            zoom: 11,
+            zoom: 12,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
@@ -57,7 +58,12 @@ var MapView = function () {
 
     this.initialize = function () {
         POIArray = JSON.parse(window.localStorage.getItem(window.localStorage.getItem("CurrentRoute")));
+
     };
 
     this.initialize();
 };
+//handle page refresh
+$("#map").on("pagebeforeshow", function (e) {
+    var newMapPage = new MapView().render();
+});

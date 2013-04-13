@@ -1,9 +1,9 @@
 /*jslint indent:4*/
-/*global window, console, $, Handlebars, alert, google, document */
+/*global window, console, $, Handlebars, alert, google, document, MapView */
 
 var DirectionsView = function () {
 
-    var directions = [], 
+    var directions = [],
         POIArray = [],
         prevDeptTime = 0;
     //start and end are POIArray elements
@@ -74,7 +74,15 @@ var DirectionsView = function () {
         POIArray = JSON.parse(window.localStorage.getItem(window.localStorage.getItem("CurrentRoute")));
 
         this.getDirections(0, 1);
+
+        $("#dir-get-map").unbind().on("tap", function (e) {
+            var mapPage = new MapView().render();
+        });
     };
 
     this.initialize();
 };
+//handle page refresh
+$("#directions").on("pagebeforeshow", function (e) {
+    var newDirPage = new DirectionsView();
+});
