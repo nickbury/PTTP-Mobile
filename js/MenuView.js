@@ -1,5 +1,5 @@
 /*jslint indent:4*/
-/*global window, console, $, Handlebars, RouteView, alert */
+/*global window, console, $, Handlebars, RouteView, alert, confirm */
 
 var MenuView = function () {
 
@@ -15,6 +15,14 @@ var MenuView = function () {
             $(".route-list a:eq(" + i + ")").on("tap", function (e) {
                 var curr = $(this).html();
                 window.localStorage.setItem("CurrentRoute", curr);
+            });
+            $(".route-list a:eq(" + i + ")").on("taphold", function (e) {
+                var ans = confirm("Do you want to delete this route?");
+                if (ans) {
+                    var curr = $(this).html();
+                    window.localStorage.removeItem(curr);
+                    $(this).parent().remove();
+                }
             });
         }
 
