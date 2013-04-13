@@ -1,5 +1,5 @@
 /*jslint indent:4*/
-/*global window, console, $, Handlebars, alert, RouteModel, google, DirectionsView */
+/*global window, console, $, Handlebars, alert, RouteModel, google, DirectionsView, MapView */
 
 var RouteView = function () {
 
@@ -91,7 +91,7 @@ var RouteView = function () {
         }
     };
 
-    this.updateRoutes = function (e) {
+    this.updateRoutes = function (e, callback) {
         var i, isReady = true;
         var nameID = $("#edit-routeName").val();
         if (nameID === "") {
@@ -152,7 +152,7 @@ var RouteView = function () {
                         alert("An error occurred trying to save the route. Please try again.");
                     } else {
                         window.localStorage.setItem("CurrentRoute", nameID);
-                        var dirPage = new DirectionsView();
+                        callback();
                     }
                 });
             }
@@ -163,7 +163,17 @@ var RouteView = function () {
         var self = this;
         this.render();
 
-        $("#edit-get-map, #edit-get-directions, #edit-get-menu").unbind().on("tap", function (e) {
+        $("#edit-get-map").unbind().on("tap", function (e) {
+            self.updateRoutes(e, function () {
+                var mapPage = new MapView().render();
+            });
+        });
+        $("#edit-get-directions").unbind().on("tap", function (e) {
+            self.updateRoutes(e, function () {
+                var dirPage = new DirectionsView();
+            });
+        });
+        $("#edit-get-menu").unbind().on("tap", function (e) {
             self.updateRoutes(e);
         });
     };
