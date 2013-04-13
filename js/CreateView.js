@@ -138,7 +138,6 @@ var CreateView = function () {
                             alert("An error occurred trying to save the route. Please try again.");
                         } else {
                             window.localStorage.setItem("CurrentRoute", nameID);
-                            var dirPage = new DirectionsView();
                         }
                     });
                 }

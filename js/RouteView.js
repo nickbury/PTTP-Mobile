@@ -152,9 +152,6 @@ var RouteView = function () {
                         alert("An error occurred trying to save the route. Please try again.");
                     } else {
                         window.localStorage.setItem("CurrentRoute", nameID);
-                        if (typeof callback === "function") {
-                            callback();
-                        }
                     }
                 });
             }
@@ -166,14 +163,10 @@ var RouteView = function () {
         this.render();
 
         $("#edit-get-map").unbind().on("tap", function (e) {
-            self.updateRoutes(e, function () {
-                var mapPage = new MapView().render();
-            });
+            self.updateRoutes(e);
         });
         $("#edit-get-directions").unbind().on("tap", function (e) {
-            self.updateRoutes(e, function () {
-                var dirPage = new DirectionsView();
-            });
+            self.updateRoutes(e);
         });
         $("#edit-get-menu").unbind().on("tap", function (e) {
             self.updateRoutes(e);
