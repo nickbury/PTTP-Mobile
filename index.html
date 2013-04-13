@@ -7,20 +7,24 @@
     <title>Public Transit Trip Planner</title>
 
     <link rel="stylesheet" type="text/css" href="css/jquery.mobile.structure-1.2.0.css" />
+    <link rel="stylesheet" type="text/css" href="css/base-theme.css" />
     <link rel="stylesheet" type="text/css" href="css/app.css" />
   </head>
   <body>
 
     <!-- Menu view page -->
 
-    <div data-role="page" id="menu"> 
+    <div data-role="page" id="menu">
+      <div data-role="header"><h1>Menu</h1></div>
       <script id="route-li-tpl" type="text/x-handlebars-template">
           {{#.}}
             <li><a href="#edit?={{this}}">{{this}}</a></li>
           {{/.}}
       </script>
-      <ul class="route-list"></ul>
-
+      <div data-role="content">
+        <ul data-role="listview" class="route-list">
+        </ul>
+      </div>
       <div data-role="footer" data-id="menuToolBar" data-position="fixed">
         <div data-role="navbar">
           <ul>
@@ -36,6 +40,7 @@
     <!-- Create New Route Page -->
 
     <div data-role="page" id="create">
+      <div data-role="header"><h1>Create New</h1></div>
       <script id="create-form-tpl" type="text/x-handlebars-template">
         <div data-role="fieldcontain" id="form-{{this}}">
           <label for="location">Location:</label>
@@ -68,6 +73,7 @@
     <!-- Route Edit Page -->
 
     <div data-role="page" id="edit">
+      <div data-role="header"><h1>Edit</h1></div>
       <script id="edit-form-tpl" type="text/x-handlebars-template">
         {{#.}}
           <div data-role="fieldcontain" id="edit-form-{{id}}">
@@ -112,6 +118,7 @@
     <!-- Directions view page -->
 
     <div data-role="page" id="directions">
+      <div data-role="header"><h1>Directions</h1></div>
       <script id="directions-li-tpl" type="text/x-handlebars-template">
         <div id="directionsPanel-{{this}}">
         </div>
