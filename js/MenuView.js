@@ -9,7 +9,7 @@ var MenuView = function () {
         var i;
 
         MenuView.template = Handlebars.compile($("#route-li-tpl").html());
-        $(".route-list").html(MenuView.template(this.localStorageKeys));
+        $(".route-list").html(MenuView.template(this.localStorageKeys)).trigger("create").listview("refresh");
 
         for (i = 0; i < this.localStorageKeys.length; i++) {
             $(".route-list a:eq(" + i + ")").on("tap", function (e) {
