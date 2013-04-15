@@ -78,7 +78,7 @@
         {{#.}}
           <div data-role="fieldcontain" id="edit-form-{{id}}">
             <label for="location">Location:</label>
-            <input type="text" name="location" class="edit-location" value="{{location}}" />
+            <input type="text" name="location" class="edit-location" id="edit-location-{{id}}" value="{{location}}" />
             <label for="time">Time (in minutes):</label>
             <input type="text" name="time" class="edit-time" value="{{time}}" />
             <a href="#" data-inline="true" data-role="button" id="edit-add-btn-{{id}}">Add Location</a>
@@ -89,7 +89,7 @@
       <script id="edit-add-form-tpl" type="text/x-handlebars-template">
         <div data-role="fieldcontain" id="edit-form-{{this}}">
           <label for="location">Location:</label>
-          <input type="text" name="location" class="edit-location" value="" />
+          <input type="text" name="location" class="edit-location" id="edit-location-{{id}}" value="" />
           <label for="time">Time (in minutes):</label>
           <input type="text" name="time" class="edit-time" value="" />
           <a href="#" data-inline="true" data-role="button" id="edit-add-btn-{{this}}">Add Location</a>
@@ -191,7 +191,7 @@
     <script src="js/lib/jquery-1.9.1.js"></script>
     <script src="js/lib/jquery.mobile-1.3.0.js"></script>
     <script src="js/lib/handlebars.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=INSERT_KEY&sensor=true"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=INSERT_KEY&libraries=places&sensor=true"></script>
     <script src="js/RouteModel.js"></script>
     <script src="js/MenuView.js"></script>
     <script src="js/RouteView.js"></script>

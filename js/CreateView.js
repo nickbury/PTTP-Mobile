@@ -14,6 +14,9 @@ var CreateView = function () {
         //render template
         var template = Handlebars.compile($("#create-form-tpl").html());
         $(".create-render").html(template(formINC)).trigger("create");
+        //attach places auto complete
+        var locationID = $("#location-" + formINC).attr("id");
+        this.addPlaceAuto(locationID);
         //clear routename
         $("#routeName").val("");
         //add handlers
@@ -32,6 +35,16 @@ var CreateView = function () {
                 formCount--;
             }
         });
+
+    };
+
+    this.addPlaceAuto = function (locationID) {
+        //add google places autocomplete
+        var latlngsw = new google.maps.LatLng(35.5808, -82.6242);
+        var latlngne = new google.maps.LatLng(35.4508, -82.6842)
+        var defaultBounds = new google.maps.LatLngBounds(latlngne, latlngsw);
+        var input = document.getElementById(locationID);
+        var searchBox = new google.maps.places.SearchBox(input, {bounds: defaultBounds});
     };
 
     this.latlngConversion = function (callback) {
@@ -61,6 +74,10 @@ var CreateView = function () {
         var template = Handlebars.compile($("#create-form-tpl").html());
         $("#form-" + formID).after(template(formINC));
         $("#form-" + formINC).trigger("create");
+        //add place auto complete
+        var locationID = $("#location-" + formINC).attr("id");
+        this.addPlaceAuto(locationID);
+        //set up button handlers
         $("#add-btn-" + formINC).on("tap", function (event) {
             var formID = $(this).attr("id").match(/\d+/);
             formINC++;

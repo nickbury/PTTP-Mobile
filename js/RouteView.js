@@ -28,12 +28,17 @@ var RouteView = function () {
         var i, self = this;
         for (i = 0; i <= formCount; i++) {
             var id = POIArray[i].id;
+            //set up places auto complete
+            var locationID = $("#edit-location-" + id).attr("id");
+            self.addPlaceAuto(locationID);
+            //add button
             $("#edit-add-btn-" + id).on("tap", function (event) {
                 var formID = $(this).attr("id").match(/\d+/);
                 formINC++;
                 formCount++;
                 self.addLocation(formID);
             });
+            //remove button
             $("#edit-rem-btn-" + id).on("tap", function (event) {
                 if (formCount === 0) {
                     alert("You need at least one place to go!");
@@ -66,6 +71,15 @@ var RouteView = function () {
                 formCount--;
             }
         });
+    };
+
+    this.addPlaceAuto = function (locationID) {
+        //add google places autocomplete
+        var latlngsw = new google.maps.LatLng(35.5808, -82.6242);
+        var latlngne = new google.maps.LatLng(35.4508, -82.6842)
+        var defaultBounds = new google.maps.LatLngBounds(latlngne, latlngsw);
+        var input = document.getElementById(locationID);
+        var searchBox = new google.maps.places.SearchBox(input, {bounds: defaultBounds});
     };
 
     this.latlngConversion = function (callback) {
