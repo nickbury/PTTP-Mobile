@@ -119,6 +119,40 @@
 
     <div data-role="page" id="directions">
       <div data-role="header"><h1>Directions</h1></div>
+      <script id="directions-tpl" type="text/x-handlebars-template">
+        {{#each directions}}
+          {{#each routes}}
+            {{#each legs}}
+              <h4>{{{start_address}}}</h4>
+              {{#each steps}}
+                {{#if steps}}
+                  {{! walking directions}}
+                  <li><p>
+                    {{{instructions}}} <span class="dir-distance">{{distance.text}}</span><br />
+                    {{#each steps}}
+                      <span class="dir-walk-details">{{{instructions}}}</span> <span class="dir-duration">{{duration.text}}</span><br />
+                    {{/each}}
+                  </p></li>
+                {{else}}
+                  {{! transit directions}}
+                  <li>
+                    <p>{{transit.departure_stop.name}}<br />
+                       {{instructions}}<br />
+                       {{transit.departure_time.text}} - {{transit.arrival_time.text}} ({{duration.text}}, {{transit.num_stops}} stops)
+                    </p>
+                  </li>
+
+                {{/if}}
+              {{/each}}
+              <h4>{{{end_address}}}</h4>
+            {{/each}}
+          {{/each}}
+        {{/each}}
+      </script>
+
+      <ul data-role="listview" id="directions-tpl-render">
+      </ul>
+
       <script id="directions-li-tpl" type="text/x-handlebars-template">
         <div id="directionsPanel-{{this}}">
         </div>

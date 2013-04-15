@@ -57,15 +57,17 @@ var DirectionsView = function () {
     };
 
     this.render = function (n) {
-        var template = Handlebars.compile($("#directions-li-tpl").html());
-        $(".directionsContainer").append(template(n)).trigger("create");
-
+        var template = Handlebars.compile($("#directions-tpl").html());
+        $("#directions-tpl-render").html(template({directions: directions})).trigger("create");
+        //$("#directions-tpl-render").listview("refresh");
+        /*
         var directionsDisplay = new google.maps.DirectionsRenderer();
         directionsDisplay.setPanel(document.getElementById("directionsPanel-" + n));
         directionsDisplay.setDirections(directions[n]);
         if (n+1 < directions.length) {
             this.render(n+1);
         }
+        */
     };
 
     this.initialize = function () {
