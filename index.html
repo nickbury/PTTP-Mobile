@@ -127,24 +127,25 @@
               {{#each steps}}
                 {{#if steps}}
                   {{! walking directions}}
-                  <li><p>
+                  <li class="dir-detail">
                     {{{instructions}}} <span class="dir-distance">{{distance.text}}</span><br />
+                    <ol>
                     {{#each steps}}
+                      <li>
                       <span class="dir-walk-details">{{{instructions}}}</span> <span class="dir-duration">{{duration.text}}</span><br />
+                      </li>
                     {{/each}}
-                  </p></li>
+                  </ol></li>
                 {{else}}
                   {{! transit directions}}
-                  <li>
-                    <p>{{transit.departure_stop.name}}<br />
+                  <li class="dir-detail">
+                    <p><span class="dir-transit-dept-stop">{{transit.departure_stop.name}}</span><br />
                        {{instructions}}<br />
-                       {{transit.departure_time.text}} - {{transit.arrival_time.text}} ({{duration.text}}, {{transit.num_stops}} stops)
+                       {{transit.departure_time.text}} - {{transit.arrival_time.text}} <span class="dir-transit-stops">({{duration.text}}, {{transit.num_stops}} stops)</span>
                     </p>
                   </li>
-
                 {{/if}}
               {{/each}}
-              <h4>{{{end_address}}}</h4>
             {{/each}}
           {{/each}}
         {{/each}}
@@ -153,13 +154,9 @@
       <ul data-role="listview" id="directions-tpl-render">
       </ul>
 
-      <script id="directions-li-tpl" type="text/x-handlebars-template">
-        <div id="directionsPanel-{{this}}">
-        </div>
+      <h4 id="dir-end-address"></h4>
+      <p id="google-copyright-maps"></p>
 
-      </script>
-      <div class="directionsContainer">
-      </div>
       <div data-role="footer" data-id="menuToolBar" data-position="fixed">
         <div data-role="navbar">
           <ul>

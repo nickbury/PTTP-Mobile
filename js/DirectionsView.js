@@ -57,17 +57,14 @@ var DirectionsView = function () {
     };
 
     this.render = function (n) {
+        //render template
         var template = Handlebars.compile($("#directions-tpl").html());
         $("#directions-tpl-render").html(template({directions: directions})).trigger("create");
-        //$("#directions-tpl-render").listview("refresh");
-        /*
-        var directionsDisplay = new google.maps.DirectionsRenderer();
-        directionsDisplay.setPanel(document.getElementById("directionsPanel-" + n));
-        directionsDisplay.setDirections(directions[n]);
-        if (n+1 < directions.length) {
-            this.render(n+1);
-        }
-        */
+
+        //inject end address
+        $("#dir-end-address").html(directions[directions.length - 1].routes[0].legs[0].end_address);
+        //display google copyright
+        $("#google-copyright-maps").html(directions[0].routes[0].copyrights);
     };
 
     this.initialize = function () {
