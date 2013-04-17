@@ -177,17 +177,24 @@ var RouteView = function () {
 
     this.initialize = function () {
         var self = this;
-        this.render();
+        var curr = window.localStorage.getItem("CurrentRoute");
+        var isAvailable = window.localStorage.getItem(curr);
+        if (isAvailable !== null) {
+            this.render();
 
-        $("#edit-get-map").unbind().on("tap", function (e) {
-            self.updateRoutes(e);
-        });
-        $("#edit-get-directions").unbind().on("tap", function (e) {
-            self.updateRoutes(e);
-        });
-        $("#edit-get-menu").unbind().on("tap", function (e) {
-            self.updateRoutes(e);
-        });
+            $("#edit-get-map").unbind().on("tap", function (e) {
+                self.updateRoutes(e);
+            });
+            $("#edit-get-directions").unbind().on("tap", function (e) {
+                self.updateRoutes(e);
+            });
+            $("#edit-get-menu").unbind().on("tap", function (e) {
+                self.updateRoutes(e);
+            });
+        } else {
+            $(".warning").html("No directions to display. Please navigate back to the menu to either choose a route or create a new one.");
+        }
+
     };
 
     this.initialize();

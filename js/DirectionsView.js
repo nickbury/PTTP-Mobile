@@ -63,15 +63,14 @@ var DirectionsView = function () {
     };
 
     this.initialize = function () {
-        $(".directionsContainer").empty();
-        var self = this;
-        POIArray = JSON.parse(window.localStorage.getItem(window.localStorage.getItem("CurrentRoute")));
-
-        this.getDirections(0, 1);
-
-        /*$("#dir-get-map").unbind().on("tap", function (e) {
-            var mapPage = new MapView().render();
-        });*/
+        var curr = window.localStorage.getItem("CurrentRoute");
+        var isAvailable = window.localStorage.getItem(curr);
+        if (isAvailable !== null) {
+            POIArray = JSON.parse(isAvailable);
+            this.getDirections(0, 1);
+        } else {
+            $(".warning").html("No directions to display. Please navigate back to the menu to either choose a route or create a new one.");
+        }
     };
 
     this.initialize();

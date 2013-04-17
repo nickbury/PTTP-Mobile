@@ -28,7 +28,7 @@ var app = {
         });
 
         $("#map").bind("pageshow", function (e) {
-            self.mapPage = new MapView().render();
+            self.mapPage = new MapView();
         });
 
     },

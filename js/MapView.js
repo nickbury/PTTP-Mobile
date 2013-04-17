@@ -45,7 +45,7 @@ var MapView = function () {
 
     };
 
-    this.render = function () {
+    this.render = function (hasRoute) {
 
         var mapOptions = {
             center: new google.maps.LatLng(35.6008, -82.5542),
@@ -53,12 +53,20 @@ var MapView = function () {
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-        this.addMarkers(map);
+        if (hasRoute) {
+            this.addMarkers(map);
+        }
     };
 
     this.initialize = function () {
-        POIArray = JSON.parse(window.localStorage.getItem(window.localStorage.getItem("CurrentRoute")));
-
+        var curr = window.localStorage.getItem("CurrentRoute");
+        var isAvailable = window.localStorage.getItem(curr);
+        if (isAvailable !== null) {
+            POIArray = JSON.parse(isAvailable);
+            this.render(true);
+        } else {
+            this.render(false);
+        }
     };
 
     this.initialize();
