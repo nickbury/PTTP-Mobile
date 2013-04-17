@@ -35,13 +35,12 @@ var CreateView = function () {
                 formCount--;
             }
         });
-        var template = Handlebars.compile($("#create-form-tpl").html());
-        $(".create-render").html(template(formINC)).trigger("create");
+        //render second form
+        formINC++;
+        $(".create-render").append(template(formINC)).trigger("create");
         //attach places auto complete
-        var locationID = $("#location-" + formINC).attr("id");
-        this.addPlaceAuto(locationID);
-        //clear routename
-        $("#routeName").val("");
+        var locationID2 = $("#location-" + formINC).attr("id");
+        this.addPlaceAuto(locationID2);
         //add handlers
         $("#add-btn-" + formINC).on("tap", function (event) {
             var formID = $(this).attr("id").match(/\d+/);
@@ -58,6 +57,7 @@ var CreateView = function () {
                 formCount--;
             }
         });
+        formCount++;
     };
 
     this.addPlaceAuto = function (locationID) {
@@ -169,7 +169,6 @@ var CreateView = function () {
                             POIArray[i].latlng = results[i];
                         }
                         var newRoute = new RouteModel(nameID, POIArray);
-                        console.log(newRoute);
                         var isSaved = newRoute.save();
                         if (!isSaved) {
                             e.stopImmediatePropagation();
