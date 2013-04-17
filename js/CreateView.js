@@ -35,7 +35,29 @@ var CreateView = function () {
                 formCount--;
             }
         });
-
+        var template = Handlebars.compile($("#create-form-tpl").html());
+        $(".create-render").html(template(formINC)).trigger("create");
+        //attach places auto complete
+        var locationID = $("#location-" + formINC).attr("id");
+        this.addPlaceAuto(locationID);
+        //clear routename
+        $("#routeName").val("");
+        //add handlers
+        $("#add-btn-" + formINC).on("tap", function (event) {
+            var formID = $(this).attr("id").match(/\d+/);
+            formINC++;
+            formCount++;
+            self.addLocation(formID);
+        });
+        $("#rem-btn-" + formINC).on("tap", function (event) {
+            if (formCount === 1) {
+                alert("You need at least one place to go!");
+            } else {
+                var toBeRemoved = $(this).attr("id").match(/\d+/);
+                $("#form-" + toBeRemoved).remove();
+                formCount--;
+            }
+        });
     };
 
     this.addPlaceAuto = function (locationID) {
@@ -97,7 +119,6 @@ var CreateView = function () {
 
     this.initialize = function () {
         var self = this;
-        this.render();
         this.render();
         //on tap, create new route
         $("#get-directions").on("tap", function (e) {
