@@ -56,6 +56,10 @@ var RouteView = function () {
         var template = Handlebars.compile($("#edit-add-form-tpl").html());
         $("#edit-form-" + formID).after(template(formINC));
         $("#edit-form-" + formINC).trigger("create");
+        //add places autocomplete
+        var locationID = $("#edit-location-" + formINC).attr("id");
+        self.addPlaceAuto(locationID);
+        //set up button handlers
         $("#edit-add-btn-" + formINC).on("tap", function (event) {
             var formID = $(this).attr("id").match(/\d+/);
             formINC++;
@@ -83,7 +87,6 @@ var RouteView = function () {
     };
 
     this.latlngConversion = function (callback) {
-        console.log("latlng " + addresses.length);
         var curr = addresses.pop(), self = this;
         var geocoder = new google.maps.Geocoder();
         if (geocoder) {

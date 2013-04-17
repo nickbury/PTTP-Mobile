@@ -63,7 +63,3 @@ var MapView = function () {
 
     this.initialize();
 };
-//handle page refresh
-$("#map").on("pagebeforeshow", function (e) {
-    var newMapPage = new MapView().render();
-});

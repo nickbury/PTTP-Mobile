@@ -74,14 +74,10 @@ var DirectionsView = function () {
 
         this.getDirections(0, 1);
 
-        $("#dir-get-map").unbind().on("tap", function (e) {
+        /*$("#dir-get-map").unbind().on("tap", function (e) {
             var mapPage = new MapView().render();
-        });
+        });*/
     };
 
     this.initialize();
 };
-//handle page refresh
-$("#directions").on("pagebeforeshow", function (e) {
-    var newDirPage = new DirectionsView();
-});
