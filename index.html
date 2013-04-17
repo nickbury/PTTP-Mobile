@@ -123,7 +123,7 @@
         {{#each directions}}
           {{#each routes}}
             {{#each legs}}
-              <h4>{{{start_address}}}</h4>
+              <h4 class="dir-address">{{{start_address}}}</h4>
               {{#each steps}}
                 {{#if steps}}
                   {{! walking directions}}
@@ -154,7 +154,7 @@
       <ul data-role="listview" id="directions-tpl-render">
       </ul>
 
-      <h4 id="dir-end-address"></h4>
+      <h4 class="dir-address" id="dir-end-address"></h4>
       <p id="google-copyright-maps"></p>
 
       <div data-role="footer" data-id="menuToolBar" data-position="fixed">
