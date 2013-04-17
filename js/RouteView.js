@@ -40,7 +40,7 @@ var RouteView = function () {
             });
             //remove button
             $("#edit-rem-btn-" + id).on("tap", function (event) {
-                if (formCount === 0) {
+                if (formCount === 1) {
                     alert("You need at least one place to go!");
                 } else {
                     var toBeRemoved = $(this).attr("id").match(/\d+/);
@@ -67,7 +67,7 @@ var RouteView = function () {
             self.addLocation(formID);
         });
         $("#edit-rem-btn-" + formINC).on("tap", function (event) {
-            if (formCount === 0) {
+            if (formCount === 1) {
                 alert("You need at least one place to go!");
             } else {
                 var toBeRemoved = $(this).attr("id").match(/\d+/);

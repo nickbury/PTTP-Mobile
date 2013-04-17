@@ -27,7 +27,7 @@ var CreateView = function () {
             self.addLocation(formID);
         });
         $("#rem-btn-" + formINC).on("tap", function (event) {
-            if (formCount === 0) {
+            if (formCount === 1) {
                 alert("You need at least one place to go!");
             } else {
                 var toBeRemoved = $(this).attr("id").match(/\d+/);
@@ -85,7 +85,7 @@ var CreateView = function () {
             self.addLocation(formID);
         });
         $("#rem-btn-" + formINC).on("tap", function (event) {
-            if (formCount === 0) {
+            if (formCount === 1) {
                 alert("You need at least one place to go!");
             } else {
                 var toBeRemoved = $(this).attr("id").match(/\d+/);
@@ -97,6 +97,7 @@ var CreateView = function () {
 
     this.initialize = function () {
         var self = this;
+        this.render();
         this.render();
         //on tap, create new route
         $("#get-directions").on("tap", function (e) {
