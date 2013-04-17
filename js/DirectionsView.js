@@ -28,7 +28,6 @@ var DirectionsView = function () {
                 prevDeptTime = deptTime;
             }
         }
-        console.log("deptTime: " + deptTime);
         //create request to send to google
         var request = {
             origin: point1,
@@ -42,13 +41,9 @@ var DirectionsView = function () {
         directionsService.route(request, function (response, status) {
             if (status === google.maps.DirectionsStatus.OK) {
                 directions.push(response);
-                console.log("directions length: " + directions.length);
-                console.log(directions[n]);
                 if (m+1 > POIArray.length - 1) {
-                    console.log("render");
                     self.render(0);
                 } else {
-                    console.log("get more directions");
                     self.getDirections(n+1, m+1);
 
                 }

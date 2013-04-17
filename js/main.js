@@ -22,7 +22,7 @@ var app = {
 
         $("#directions").on("pagebeforeshow", function (e) {
             var isRefresh = window.localStorage.getItem("isDirRefresh");
-            if (isRefresh) {
+            if (isRefresh === "true") {
                 self.dirPage = new DirectionsView();
             }
         });
