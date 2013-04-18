@@ -1,5 +1,17 @@
 @charset 'UTF-8';
 
+/* Route Edit and Create Pages */
+.app-form {
+  padding-right: 0.5em;
+  padding-left: 0.5em;
+}
+
+.app-label {
+  font-weight: 600;
+  display: block;
+  padding-top: 0.3em;
+}
+
 /* Map Page */
 #map-canvas {
   height: 100%;
@@ -36,7 +48,7 @@
 
 .dir-transit-stops {
   color:gray;
-  font-size: .9em;
+  font-size: 0.9em;
 }
 
 .dir-address {

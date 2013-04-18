@@ -49,17 +49,17 @@
     <div data-role="page" id="create">
       <div data-role="header"><h1>Create New Route</h1></div>
       <script id="create-form-tpl" type="text/x-handlebars-template">
-        <div data-role="fieldcontain" id="form-{{this}}">
-          <label for="location">Location:</label>
+        <div data-role="fieldcontain" id="form-{{this}}" class="app-form">
+          <label for="location" class="app-label">Location:</label>
           <input type="text" name="location" class="location" id="location-{{this}}" value="" />
-          <label for="time">How long will you be there? (in minutes):</label>
+          <label for="time" class="app-label">How long will you be there? (in minutes):</label>
           <input type="text" name="time" class="time" id="time-{{this}}" value="" />
           <a href="#" data-inline="true" data-mini="true" data-role="button" id="add-btn-{{this}}">Add New Location</a>
           <a href="#" data-inline="true" data-mini="true" data-role="button" id="rem-btn-{{this}}">Remove Location</a>
         </div>
       </script>
-      <div data-role="fieldcontain">
-        <label for="routeName">Route Name:</label>
+      <div data-role="fieldcontain" class="app-form">
+        <label for="routeName"><b>Route Name:</b></label>
         <input type="text" name="routeName" id="routeName" value="" />
       </div>
       <div class="create-render">
@@ -83,10 +83,10 @@
       <div data-role="header"><h1>Edit Route</h1></div>
       <script id="edit-form-tpl" type="text/x-handlebars-template">
         {{#.}}
-          <div data-role="fieldcontain" id="edit-form-{{id}}">
-            <label for="location">Location:</label>
+          <div data-role="fieldcontain" id="edit-form-{{id}}" class="app-form">
+            <label for="location" class="app-label">Location:</label>
             <input type="text" name="location" class="edit-location" id="edit-location-{{id}}" value="{{location}}" />
-            <label for="time">How long will you be there? (in minutes):</label>
+            <label for="time" class="app-label">How long will you be there? (in minutes):</label>
             <input type="text" name="time" class="edit-time" value="{{time}}" />
             <a href="#" data-inline="true" data-mini="true" data-role="button" id="edit-add-btn-{{id}}">Add New Location</a>
             <a href="#" data-inline="true" data-mini="true" data-role="button" id="edit-rem-btn-{{id}}">Remove Location</a>
@@ -94,17 +94,17 @@
         {{/.}}
       </script>
       <script id="edit-add-form-tpl" type="text/x-handlebars-template">
-        <div data-role="fieldcontain" id="edit-form-{{this}}">
-          <label for="location">Location:</label>
+        <div data-role="fieldcontain" id="edit-form-{{this}}" class="app-form">
+          <label for="location" class="app-label">Location:</label>
           <input type="text" name="location" class="edit-location" id="edit-location-{{this}}" value="" />
-          <label for="time">How long will you be there? (in minutes):</label>
+          <label for="time" class="app-label">How long will you be there? (in minutes):</label>
           <input type="text" name="time" class="edit-time" value="" />
           <a href="#" data-inline="true" data-mini="true" data-role="button" id="edit-add-btn-{{this}}">Add New Location</a>
           <a href="#" data-inline="true" data-mini="true" data-role="button" id="edit-rem-btn-{{this}}">Remove Location</a>
         </div>
       </script>
-      <div data-role="fieldcontain">
-        <label for="edit-routeName">Route Name:</label>
+      <div data-role="fieldcontain" class="app-form">
+        <label for="edit-routeName"><b>Route Name:</b></label>
         <input type="text" name="edit-routeName" id="edit-routeName" value="" />
       </div>
       <div class="edit-render">
