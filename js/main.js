@@ -35,6 +35,12 @@ var app = {
 
     initialize: function () {
         this.route();
+        var isNew = window.localStorage.getItem("isNew");
+        if (isNew === null || isNew === undefined) {
+            alert("First time here? Check out the info button in the top right hand corner.");
+            window.localStorage.setItem("isNew", true);
+        }
+
     }
 };
 

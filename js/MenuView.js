@@ -33,7 +33,9 @@ var MenuView = function () {
         var key;
         for (key in window.localStorage) {
             if (window.localStorage.hasOwnProperty(key)) {
-                if (key !== "CurrentRoute" && key !== "isDirRefresh") {
+                var check = window.localStorage.getItem(key);
+                console.log(check);
+                if (check.indexOf("location") !== -1 && check.indexOf("id") !== -1 && check.indexOf("latlng") !== -1) {
                     this.localStorageKeys.push(key);
                 }
             }
