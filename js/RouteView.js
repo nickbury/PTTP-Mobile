@@ -133,7 +133,6 @@ var RouteView = function () {
                     alert("Each point of interest needs a location and a time");
                     isReady = false;
                     addresses = [];
-                    console.log("bad " + id);
                 } else if (isNaN(time)) {
                     e.stopImmediatePropagation();
                     e.preventDefault();

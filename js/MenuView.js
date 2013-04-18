@@ -26,6 +26,16 @@ var MenuView = function () {
             });
         }
 
+        $("#infobtn").bind("tap", function (e) {
+            alert("Welcome to the Public Transit Trip Planner!\n\n" +
+                   "How does it work?\n" +
+                   "Select a pre-existing route or create a new one.\n" +
+                   "Set the how long you wish to be at each destination.\n" +
+                   "Then just follow the directions using the map as reference.\n\n" +
+                   "To delete a route, just press and hold on the route in the menu.\n\n" +
+                   "Enjoy!");
+        });
+
         return this;
     };
 
@@ -34,7 +44,6 @@ var MenuView = function () {
         for (key in window.localStorage) {
             if (window.localStorage.hasOwnProperty(key)) {
                 var check = window.localStorage.getItem(key);
-                console.log(check);
                 if (check.indexOf("location") !== -1 && check.indexOf("id") !== -1 && check.indexOf("latlng") !== -1) {
                     this.localStorageKeys.push(key);
                 }

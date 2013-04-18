@@ -27,6 +27,7 @@
 
 .dir-detail {
   padding-left: 2em;
+  padding-right: 1em;
 }
 
 .dir-transit-dept-stop {
@@ -40,6 +41,7 @@
 
 .dir-address {
   padding-left: 1em;
+  padding-right: 1em;
 }
 
 #google-copyright-maps {
