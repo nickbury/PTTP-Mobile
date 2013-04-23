@@ -1,5 +1,5 @@
 /*jslint indent:4*/
-/*global window, console, $, Handlebars, alert, RouteModel, google, DirectionsView, MapView */
+/*global window, console, $, Handlebars, alert, RouteModel, google, DirectionsView, MapView, document */
 
 var RouteView = function () {
 
@@ -80,7 +80,7 @@ var RouteView = function () {
     this.addPlaceAuto = function (locationID) {
         //add google places autocomplete
         var latlngsw = new google.maps.LatLng(35.5808, -82.6242);
-        var latlngne = new google.maps.LatLng(35.4508, -82.6842)
+        var latlngne = new google.maps.LatLng(35.4508, -82.6842);
         var defaultBounds = new google.maps.LatLngBounds(latlngne, latlngsw);
         var input = document.getElementById(locationID);
         var searchBox = new google.maps.places.SearchBox(input, {bounds: defaultBounds});

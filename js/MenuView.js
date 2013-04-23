@@ -26,12 +26,12 @@ var MenuView = function () {
             });
         }
 
-        $("#infobtn").bind("tap", function (e) {
+        $("#infobtn").unbind().bind("tap", function (e) {
             alert("Welcome to the Public Transit Trip Planner!\n\n" +
                    "How does it work?\n" +
-                   "Select a pre-existing route or create a new one.\n" +
-                   "Set the how long you wish to be at each destination.\n" +
-                   "Then just follow the directions using the map as reference.\n\n" +
+                   "1. Select a pre-existing route or create a new one\n" +
+                   "2. Set how long you wish to be at each destination\n" +
+                   "3. Then just follow the directions using the map as reference\n\n" +
                    "To delete a route, just press and hold on the route in the menu.\n\n" +
                    "Enjoy!");
         });
