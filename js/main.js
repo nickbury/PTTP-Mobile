@@ -16,7 +16,7 @@ var app = {
         });
 
         $("#edit").on("pagebeforeshow", function (event, ui) {
-            window.localStorage.setItem("isDirRefresh", true);
+            window.localStorage.setItem("isDirRefresh", false);
             self.routePage = new RouteView();
         });
 
